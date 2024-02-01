@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %} Bosh sahifa {% endblock title %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col col-md-4 bg-light border rounded p-3">
+        <h3 class="mb-3">Post joylash</h3>
+       <form action="" method="post" enctype="multipart/form-data">
+        {{ form }}
+        {% csrf_token %}
+        <button class="btn btn-success mt-3">Yuborish</button>
+       </form>
+    </div>
+    <div class="col col-md-8 ">
+        <h3>Barcha Postlar</h3>
+       <div class="row">
+        <div class="col overflow-scroll" style="height: 500px;">
+            {% if posts %}
+       {% for post in posts %}
+       
+       <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ post.post_rasmi.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"> <a href="">{{ post.sarlavha|truncatechars:40 }}</a> </h5>
+              <p class="card-text"> {{ post.post_matni|truncatechars:210 }} </p>
+              <p class="card-text"><small class="text-body-secondary"> {{ post.created_at }} </small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       {% endfor %}
+       {% else %}
+       <p>Postlar hali yaratilmadi 😔</p>
+       {% endif %}
+        </div>
+       </div>
+    </div>
+</div>
+        
+{% endblock content %}
